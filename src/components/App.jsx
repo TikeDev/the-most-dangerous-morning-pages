@@ -9,6 +9,7 @@ import Failure from "./Failure";
 import Download from "./Download";
 import Editor from "./Editor";
 import { AppContext } from "./AppContext";
+import { STORAGE_KEYS, saveEntry } from "./Workspace";
 
 const withFullscreenHook = (Component) => {
   return (props) => {
@@ -21,7 +22,7 @@ class WritingApp extends React.Component {
   constructor(props) {
     super(props);
 
-    let { limit, type, hardcore, nightmode, fullscreenHandler } = this.props;
+    let { limit, type, hardcore, nightmode, morning, fullscreenHandler } = this.props;
     this.handleStroke = this.handleStroke.bind(this);
     this.fullscreenHandler = fullscreenHandler;
     this.reset = this.reset.bind(this);
@@ -48,6 +49,7 @@ class WritingApp extends React.Component {
       limit: limit,
       type: type,
       hardcore: hardcore,
+      morning: morning || false,
     };
   }
 
@@ -57,8 +59,10 @@ class WritingApp extends React.Component {
 
   startWriting() {
     if (window.plausible) window.plausible("Start Writing");
+    if (!this.fullscreenHandler.active) this.fullscreenHandler.enter();
     this.setState({
       run: true,
+      fullscreen: true,
       startTime: this.now(),
       timerID: setInterval(() => this.tick(), 100),
     });
@@ -107,6 +111,15 @@ class WritingApp extends React.Component {
     this.setState({
       won: true,
       run: false,
+    });
+    saveEntry(this.state.morning ? STORAGE_KEYS.morningPages : STORAGE_KEYS.sessions, {
+      id: Date.now(),
+      text: this.state.text || "",
+      words: this.state.words || 0,
+      type: this.state.type,
+      limit: this.state.limit,
+      startedAt: this.state.startTime * 1000,
+      finishedAt: Date.now(),
     });
     if (window.plausible) window.plausible("Win");
   }

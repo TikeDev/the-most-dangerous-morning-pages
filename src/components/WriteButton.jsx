@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { readSettings } from "./Workspace";
 var classNames = require('classnames');
 
 export default class WriteButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hardcore: this.props.hardcore || false,
-      limit: this.props.limit || 5,
-      type: this.props.type || "minutes",
+      hardcore: this.props.hardcore ?? readSettings().hardcore,
+      limit: this.props.limit || readSettings().limit,
+      type: this.props.type || readSettings().type,
       compact: true,
       hidePanel: this.props.hidePanel
     };
