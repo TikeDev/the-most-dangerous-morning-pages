@@ -39,15 +39,18 @@ const App = (props) => {
   return <WritingApp key={Math.random()} {...appProps} />;
 };
 
+const githubPagesBase =
+  typeof window !== "undefined" && window.location.hostname === "maebert.github.io"
+    ? "/themostdangerouswritingapp"
+    : undefined;
+
 const router = createBrowserRouter(
   [
     { path: "/", element: <Welcome /> },
     { path: "/write", element: <App /> },
     { path: "/help", element: <Help /> },
   ],
-  // CRA derives PUBLIC_URL from the GitHub Pages homepage, which makes the
-  // local root URL fail to match any route during development.
-  { basename: process.env.NODE_ENV === "production" ? process.env.PUBLIC_URL : undefined }
+  { basename: githubPagesBase }
 );
 
 export default class MDWA extends Component {
