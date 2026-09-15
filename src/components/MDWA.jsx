@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Welcome from "./Welcome";
 import Help from "./Help";
 import WritingApp from "./App";
+import { AppShell, HistoryPage, SettingsPage } from "./Workspace";
 
 import {
   createBrowserRouter,
@@ -32,6 +33,7 @@ const App = (props) => {
     type: searchParams.get("type") || "minutes",
     hardcore: parse(searchParams.get("hardcore")),
     nightmode: parse(searchParams.get("nightmode")),
+    morning: searchParams.get("morning") === "true",
   };
   // Setting a random key forces the component to re-mount even if
   // the route didn't change. That's useful for when we click the
@@ -47,7 +49,10 @@ const githubPagesBase =
 const router = createBrowserRouter(
   [
     { path: "/", element: <Welcome /> },
-    { path: "/write", element: <App /> },
+    { path: "/write", element: <AppShell><App /></AppShell> },
+    { path: "/morning-pages", element: <AppShell><HistoryPage morning /></AppShell> },
+    { path: "/sessions", element: <AppShell><HistoryPage /></AppShell> },
+    { path: "/settings", element: <AppShell><SettingsPage /></AppShell> },
     { path: "/help", element: <Help /> },
   ],
   { basename: githubPagesBase }

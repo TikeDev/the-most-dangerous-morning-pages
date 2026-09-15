@@ -65,7 +65,7 @@ const Welcome = () => (
         <i className="caret icon-cursor" />
       </h2>
       <Space xl />
-      <WriteButton ghost color="red" />
+      <div className="welcome-actions"><WriteButton ghost color="red" /><Link className="morning-link" to="/write?morning=true&type=words&limit=750">Start Morning Pages <span>750 words</span></Link></div>
     </div>
     <div className="accolades" />
   </div>
