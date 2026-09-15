@@ -48,7 +48,7 @@ const githubPagesBase =
 
 const router = createBrowserRouter(
   [
-    { path: "/", element: <Welcome /> },
+    { path: "/", element: <AppShell><Welcome /></AppShell> },
     { path: "/write", element: <AppShell><App /></AppShell> },
     { path: "/morning-pages", element: <AppShell><HistoryPage morning /></AppShell> },
     { path: "/sessions", element: <AppShell><HistoryPage /></AppShell> },

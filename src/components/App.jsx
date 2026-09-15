@@ -59,8 +59,10 @@ class WritingApp extends React.Component {
 
   startWriting() {
     if (window.plausible) window.plausible("Start Writing");
+    if (!this.fullscreenHandler.active) this.fullscreenHandler.enter();
     this.setState({
       run: true,
+      fullscreen: true,
       startTime: this.now(),
       timerID: setInterval(() => this.tick(), 100),
     });

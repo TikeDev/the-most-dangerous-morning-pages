@@ -39,22 +39,26 @@ export function AppShell({ children }) {
 
   return (
     <div className={`workspace ${inWriting ? "workspace-writing" : ""}`}>
-      <aside className={`sidebar ${open ? "is-open" : ""}`}>
-        <Link to="/" className="sidebar-brand" aria-label="Go to home">
-          <span className="brand-mark">MDWA</span>
-          <span className="brand-name">The Most Dangerous<br />Writing App</span>
-        </Link>
-        <nav aria-label="Main navigation" className="sidebar-nav">
-          {navItems.map(({ to, label, icon }) => (
-            <NavLink key={to} to={to} className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`} onClick={() => setOpen(false)}>
-              <i className={icon} aria-hidden="true" />
-              <span>{label}</span>
-            </NavLink>
-          ))}
-        </nav>
-        <div className="sidebar-footer">Keep the words moving.</div>
-      </aside>
-      <button className="sidebar-toggle" aria-label="Toggle navigation" onClick={() => setOpen(!open)}>☰</button>
+      {!inWriting && (
+        <>
+          <aside className={`sidebar ${open ? "is-open" : ""}`}>
+            <Link to="/" className="sidebar-brand" aria-label="Go to home">
+              <span className="brand-mark">MDWA</span>
+              <span className="brand-name">The Most Dangerous<br />Writing App</span>
+            </Link>
+            <nav aria-label="Main navigation" className="sidebar-nav">
+              {navItems.map(({ to, label, icon }) => (
+                <NavLink key={to} to={to} className={({ isActive }) => `sidebar-link ${isActive ? "active" : ""}`} onClick={() => setOpen(false)}>
+                  <i className={icon} aria-hidden="true" />
+                  <span>{label}</span>
+                </NavLink>
+              ))}
+            </nav>
+            <div className="sidebar-footer">Keep the words moving.</div>
+          </aside>
+          <button className="sidebar-toggle" aria-label="Toggle navigation" onClick={() => setOpen(!open)}>☰</button>
+        </>
+      )}
       <main className="workspace-main">{children || <Outlet />}</main>
     </div>
   );
