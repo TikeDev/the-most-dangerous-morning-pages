@@ -4,7 +4,7 @@
 .brand-mark { display: grid; place-items: center; width: 42px; height: 42px; background: $red; color: $white; font-size: 10px; letter-spacing: .08em; font-weight: 700; }
 .brand-name { font-size: 12px; line-height: 1.35; }
 .sidebar-nav { display: flex; flex-direction: column; gap: 6px; margin-top: 64px; }
-.sidebar-link { display: flex; align-items: center; gap: 12px; padding: 13px 14px; border-radius: 2px; color: $grey; text-decoration: none; font-size: 14px; transition: background .2s, color .2s; }
+.sidebar-link { display: flex; align-items: center; gap: 12px; padding: 13px 14px; border-radius: 2px; color: $grey; text-decoration: none; font-size: 1.2rem; transition: background .2s, color .2s; }
 .sidebar-link i { width: 18px; text-align: center; opacity: .65; }
 .sidebar-link:hover, .sidebar-link.active { color: $red; background: rgba(160, 49, 43, .08); }
 .sidebar-footer { margin-top: auto; font-size: 11px; opacity: .45; }
