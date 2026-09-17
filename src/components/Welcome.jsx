@@ -10,7 +10,7 @@ const Welcome = () => (
         <h1>
           <span>The Most</span>
           <span>Dangerous</span>
-          <span>Writing App</span>
+          <span>Morning Pages</span>
         </h1>
       </div>
       <Space m />

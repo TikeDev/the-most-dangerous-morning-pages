@@ -45,7 +45,7 @@ export function AppShell({ children }) {
           <aside className={`sidebar ${open ? "is-open" : ""}`}>
             <Link to="/" className="sidebar-brand" aria-label="Go to home">
               <span className="brand-mark">MDWA</span>
-              <span className="brand-name">The Most Dangerous<br />Writing App</span>
+              <span className="brand-name">The Most Dangerous<br />Morning Pages</span>
             </Link>
             <nav aria-label="Main navigation" className="sidebar-nav">
               {navItems.map(({ to, label, icon }) => (

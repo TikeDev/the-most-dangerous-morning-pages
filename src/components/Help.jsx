@@ -58,7 +58,7 @@ export default class Help extends React.Component {
               <span>The Most</span>
               <span>Dangerous</span>
               <span>
-                Writing App
+                Morning Pages
                 <i className="caret icon-cursor" />
               </span>
             </h1>
@@ -84,7 +84,7 @@ export default class Help extends React.Component {
           <h2>Word on the street?</h2>
 
           <p>
-            <abbr title="The Most Dangerous Writing App">MDWA</abbr> has been
+            <abbr title="The Most Dangerous Morning Pages">MDMP</abbr> has been
             featured on&nbsp;
             <a
               href="https://www.wired.com/2016/03/sadistic-writing-app-deletes-work-stop-typing/"
@@ -128,7 +128,7 @@ export default class Help extends React.Component {
           <h2>Who made this?</h2>
           <p>
             <i className="icon-mdwa" />{" "}
-            <abbr title="The Most Dangerous Writing App">MDWA</abbr> was written
+            <abbr title="The Most Dangerous Morning Pages">MDPG</abbr> was written
             by{" "}
             <a
               href="https://www.x.com/maebert"
@@ -165,7 +165,7 @@ export default class Help extends React.Component {
           <h2>Press Kit</h2>
           <p>
             If you would like to write about{" "}
-            <abbr title="The Most Dangerous Writing App">MDWA</abbr>, please use
+            <abbr title="The Most Dangerous Morning Pages">MDMP</abbr>, please use
             the media in the <a href="https://maebert.github.io/themostdangerouswritingapp/assets/MDWA Press Kit.zip">press kit</a> provided.{" "}
           </p>
           <p>

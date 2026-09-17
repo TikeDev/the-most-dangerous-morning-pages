@@ -7,7 +7,7 @@ import { withAppContext } from "./AppContext";
 
 const TweetButton = ({ words }) => {
   const href = `https://twitter.com/intent/tweet?text=I+wrote+${words}+words+using+The+Most+Dangerous+Writing+App+-+until+it+deleted+everything+.+%23MDWA&url=https%3A%2F%2Fmaebert.github.io%2Fthemostdangerouswritingapp%2F`;
-  const label = `I wrote ${words} words using The Most Dangerous Writing App - until it deleted everything.`;
+  const label = `I wrote ${words} words using The Most Dangerous Morning Pages - until it deleted everything.`;
   return (
     <a className="tweet" href={href}>
       {label}
