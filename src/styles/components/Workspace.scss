@@ -28,13 +28,14 @@
 .brand-mark {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  background: $red;
-  color: $white;
+  width: auto;
+  height: 100%;
+  background: #F45653;
+  color: #FFFEFA;
   font-size: 10px;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   font-weight: 700;
+  padding: 0px 5px;
 }
 
 .brand-name {
