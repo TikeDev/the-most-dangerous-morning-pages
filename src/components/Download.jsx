@@ -16,7 +16,7 @@ export default class Download extends React.Component {
     // Replace clean newlines with windows evil
     const text = this.props.text.replace(/([^\r])\n/g, "$1\r\n");
     const blob = new Blob([text], {type: "text/plain;charset=utf-8"});
-    const filename = `${title} (MDWA ${date}).txt`;
+    const filename = `${title} (MDWA ${date}).md`;
     FileSaver.saveAs(blob, filename);
   }
 

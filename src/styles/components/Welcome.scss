@@ -1,7 +1,17 @@
 .Welcome {
     position: fixed;
+    top: 0;
+    left: 180px;
     min-height: 100%;
-    width: 100%;
+    width: calc(100% - 180px);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+
+    > div {
+        width: 100%;
+        max-width: 600px;
+    }
 
     h2 {
         font-family: Merriweather;
@@ -22,15 +32,6 @@
             animation-iteration-count: infinite;
             opacity: .1;
         }
-    }
-
-    .accolades {
-        height: 53px;
-        background: url(/images/accolades.png) center center no-repeat transparent;
-        background-size: 50%;
-        position: absolute;
-        bottom: 40px;
-        width: 100%;
     }
 
     .helpButton {

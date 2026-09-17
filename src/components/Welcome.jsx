@@ -21,7 +21,6 @@ const Welcome = () => (
       <Space xl />
       <div className="welcome-actions"><WriteButton ghost color="red" /></div>
     </div>
-    <div className="accolades" />
   </div>
 );
 
