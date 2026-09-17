@@ -104,7 +104,7 @@ class WritingApp extends React.Component {
     this.warningOscillator.stop(now + 0.6);
     this.warningOscillator2.stop(now + 0.6);
 
-    this.warningGain.disconnect();
+    //this.warningGain.disconnect();
     this.warningOscillator = null;
     this.warningGain = null;
   }
