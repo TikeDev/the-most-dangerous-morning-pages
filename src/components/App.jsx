@@ -9,7 +9,7 @@ import Failure from "./Failure";
 import Download from "./Download";
 import Editor from "./Editor";
 import { AppContext } from "./AppContext";
-import { STORAGE_KEYS, saveEntry } from "./Workspace";
+import { STORAGE_KEYS, saveEntry, readSettings } from "./Workspace";
 
 const withFullscreenHook = (Component) => {
   return (props) => {
@@ -30,6 +30,9 @@ class WritingApp extends React.Component {
     this.toggleNightMode = this.toggleNightMode.bind(this);
     this.now = this.now.bind(this);
     this.editor = React.createRef();
+    this.audioContext = null;
+    this.warningOscillator = null;
+    this.warningGain = null;
 
     this.state = {
       run: false,
@@ -50,11 +53,49 @@ class WritingApp extends React.Component {
       type: type,
       hardcore: hardcore,
       morning: morning || false,
+      warningSound: readSettings().warningSound,
     };
   }
 
   componentDidMount() {
     if (window.plausible) window.plausible("Editor");
+  }
+
+  componentWillUnmount() {
+    this.stopWarningSound();
+    this.stopWriting();
+    if (this.audioContext) this.audioContext.close();
+  }
+
+  startWarningSound() {
+    if (!this.state.warningSound || this.warningOscillator) return;
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    this.audioContext = this.audioContext || new AudioContext();
+    this.audioContext.resume();
+    this.warningOscillator = this.audioContext.createOscillator();
+    this.warningGain = this.audioContext.createGain();
+    this.warningOscillator.type = "sine";
+    this.warningOscillator.frequency.value = 440;
+    const now = this.audioContext.currentTime;
+    this.warningGain.gain.setValueAtTime(0.001, now);
+    this.warningGain.gain.linearRampToValueAtTime(0.12, now + this.state.kill - this.state.fade);
+    this.warningOscillator.connect(this.warningGain);
+    this.warningGain.connect(this.audioContext.destination);
+    this.warningOscillator.start(now);
+  }
+
+  stopWarningSound() {
+    if (!this.warningOscillator || !this.audioContext) return;
+    const now = this.audioContext.currentTime;
+    this.warningGain.gain.cancelScheduledValues(now);
+    this.warningGain.gain.setValueAtTime(this.warningGain.gain.value, now);
+    this.warningGain.gain.linearRampToValueAtTime(0.001, now + 0.05);
+    this.warningOscillator.stop(now + 0.06);
+    this.warningOscillator.disconnect();
+    this.warningGain.disconnect();
+    this.warningOscillator = null;
+    this.warningGain = null;
   }
 
   startWriting() {
@@ -83,6 +124,11 @@ class WritingApp extends React.Component {
   }
 
   handleStroke(char, text) {
+    if (this.state.warningSound && !this.audioContext) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) this.audioContext = new AudioContext();
+    }
+    if (this.audioContext) this.audioContext.resume();
     if (!this.state.run && !this.state.won) this.startWriting();
     this.toggleDanger(false);
     const words = text.trim().length && text.trim().split(/\s+/).length;
@@ -95,6 +141,7 @@ class WritingApp extends React.Component {
 
   stopWriting() {
     clearInterval(this.state.timerID);
+    this.stopWarningSound();
   }
 
   toggleDanger(on) {
@@ -152,6 +199,8 @@ class WritingApp extends React.Component {
       this.state;
     if (!run) return;
     const danger = timeSinceStroke >= fade;
+    if (danger) this.startWarningSound();
+    else this.stopWarningSound();
     if (timeSinceStroke >= kill) return this.fail();
     const duration = this.now() - startTime;
     const progress = (type === "minutes" ? duration / 60.0 : words) / limit;

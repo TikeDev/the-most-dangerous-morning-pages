@@ -11,6 +11,7 @@ export const defaultSettings = {
   type: "minutes",
   limit: 5,
   hardcore: false,
+  warningSound: false,
 };
 
 export function readSettings() {
@@ -98,5 +99,5 @@ export function SettingsPage() {
     localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(next));
   };
   const limits = settings.type === "words" ? [150, 250, 500, 750, 1667] : [3, 5, 10, 15, 20, 30, 60];
-  return <section className="settings-page"><div className="page-heading"><p className="eyebrow">Make it yours</p><h1>Settings</h1><p>These defaults will be used whenever you start a new session.</p></div><div className="settings-card"><label>Goal measured in<select value={settings.type} onChange={(e) => update("type", e.target.value)}><option value="minutes">Minutes</option><option value="words">Words</option></select></label><label>Default goal<select value={settings.limit} onChange={(e) => update("limit", Number(e.target.value))}>{limits.map((limit) => <option key={limit} value={limit}>{limit} {settings.type}</option>)}</select></label><label className="setting-toggle"><span><strong>Hardcore mode</strong><small>One pause can end the session.</small></span><input type="checkbox" checked={settings.hardcore} onChange={(e) => update("hardcore", e.target.checked)} /><span className="toggle-ui" /></label></div></section>;
+  return <section className="settings-page"><div className="page-heading"><p className="eyebrow">Make it yours</p><h1>Settings</h1><p>These defaults will be used whenever you start a new session.</p></div><div className="settings-card"><label>Goal measured in<select value={settings.type} onChange={(e) => update("type", e.target.value)}><option value="minutes">Minutes</option><option value="words">Words</option></select></label><label>Default goal<select value={settings.limit} onChange={(e) => update("limit", Number(e.target.value))}>{limits.map((limit) => <option key={limit} value={limit}>{limit} {settings.type}</option>)}</select></label><label className="setting-toggle"><span><strong>Hardcore mode</strong><small>One pause can end the session.</small></span><input type="checkbox" checked={settings.hardcore} onChange={(e) => update("hardcore", e.target.checked)} /><span className="toggle-ui" /></label><label className="setting-toggle"><span><strong>Warning sound</strong><small>Gradually raises a quiet tone during the pause warning.</small></span><input type="checkbox" checked={settings.warningSound} onChange={(e) => update("warningSound", e.target.checked)} /><span className="toggle-ui" /></label></div></section>;
 }
