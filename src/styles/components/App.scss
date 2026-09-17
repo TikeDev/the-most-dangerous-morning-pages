@@ -38,15 +38,28 @@
         i.icon-night-mode {transform: rotate(180deg);}
         }
 
+    .writing-home,
     .buttons
         {
         position: absolute;
         top: 20px;
-        right: 20px;
         z-index: 100;
         font-size: $reg;
         i { opacity: .2; cursor: pointer; display: inline-block;}
         i:hover { opacity: 1; }
+        }
+
+    .writing-home {
+        left: 20px;
+        color: inherit;
+        text-decoration: none;
+        opacity: .2;
+        transition: opacity .2s ease-in;
+        &:hover { opacity: 1; }
+        }
+
+    .buttons {
+        right: 20px;
         }
     }
 

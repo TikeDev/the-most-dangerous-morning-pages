@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
@@ -78,7 +79,9 @@ class WritingApp extends React.Component {
     this.warningOscillator.type = "sine";
     this.warningOscillator.frequency.value = 440;
     const now = this.audioContext.currentTime;
-    this.warningGain.gain.setValueAtTime(0.001, now);
+    const rampIn = Math.min(0.04, Math.max(0.01, (this.state.kill - this.state.fade) / 10));
+    this.warningGain.gain.setValueAtTime(0, now);
+    this.warningGain.gain.linearRampToValueAtTime(0.12, now + rampIn);
     this.warningGain.gain.linearRampToValueAtTime(0.12, now + this.state.kill - this.state.fade);
     this.warningOscillator.connect(this.warningGain);
     this.warningGain.connect(this.audioContext.destination);
@@ -229,6 +232,9 @@ class WritingApp extends React.Component {
           <div className={appClass}>
             <Failure />
             <Progress />
+            <Link to="/" className="writing-home" aria-label="Return home">
+              <i className="icon-mdwa" aria-hidden="true"></i>
+            </Link>
             <div className="buttons">
               {won && <Download finishTime={startTime + duration} text={text} />}
               <i className="icon-night-mode" onClick={this.toggleNightMode}></i>
