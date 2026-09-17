@@ -74,17 +74,25 @@ class WritingApp extends React.Component {
     this.audioContext = this.audioContext || new AudioContext();
     this.audioContext.resume();
     this.warningOscillator = this.audioContext.createOscillator();
+    this.warningOscillator2 = this.audioContext.createOscillator();
+
     this.warningGain = this.audioContext.createGain();
+
     this.warningOscillator.type = "sine";
-    this.warningOscillator.frequency.value = 440;
+    this.warningOscillator.frequency.value = 440;    
+    
+    this.warningOscillator2.type = "sine";
+    this.warningOscillator2.frequency.value = 490;
     const now = this.audioContext.currentTime;
     const rampIn = Math.min(0.04, Math.max(0.01, (this.state.kill - this.state.fade) / 10));
     this.warningGain.gain.setValueAtTime(0, now);
     this.warningGain.gain.linearRampToValueAtTime(0.12, now + rampIn);
     this.warningGain.gain.linearRampToValueAtTime(0.12, now + this.state.kill - this.state.fade);
     this.warningOscillator.connect(this.warningGain);
+    this.warningOscillator2.connect(this.warningGain);
     this.warningGain.connect(this.audioContext.destination);
     this.warningOscillator.start(now);
+    this.warningOscillator2.start(now);
   }
 
   stopWarningSound() {
