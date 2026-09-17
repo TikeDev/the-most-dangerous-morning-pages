@@ -79,8 +79,8 @@ class WritingApp extends React.Component {
     this.warningGain = this.audioContext.createGain();
 
     this.warningOscillator.type = "sine";
-    this.warningOscillator.frequency.value = 440;    
-    
+    this.warningOscillator.frequency.value = 440;
+
     this.warningOscillator2.type = "sine";
     this.warningOscillator2.frequency.value = 500;
     const now = this.audioContext.currentTime;
@@ -101,7 +101,7 @@ class WritingApp extends React.Component {
     this.warningGain.gain.cancelScheduledValues(now);
     this.warningGain.gain.setValueAtTime(this.warningGain.gain.value, now);
     this.warningGain.gain.linearRampToValueAtTime(0.001, now + 0.5);
-    this.warningOscillator.stop(now + 0.06);
+    this.warningOscillator.stop(now + 0.6);
     this.warningOscillator.disconnect();
     this.warningGain.disconnect();
     this.warningOscillator = null;
