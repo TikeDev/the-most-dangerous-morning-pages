@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
@@ -232,9 +231,14 @@ class WritingApp extends React.Component {
           <div className={appClass}>
             <Failure />
             <Progress />
-            <Link to="/" className="writing-home" aria-label="Return home">
-              <i className="icon-mdwa" aria-hidden="true"></i>
-            </Link>
+            <a
+              href="/"
+              className="writing-home"
+              aria-label="Return home"
+              title="Return home"
+            >
+              <span className="icon-mdwa" aria-hidden="true"></span>
+            </a>
             <div className="buttons">
               {won && <Download finishTime={startTime + duration} text={text} />}
               <i className="icon-night-mode" onClick={this.toggleNightMode}></i>
