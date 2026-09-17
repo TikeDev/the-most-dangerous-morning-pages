@@ -58,7 +58,7 @@ export default class Help extends React.Component {
               <span>The Most</span>
               <span>Dangerous</span>
               <span>
-                Writing App
+                Morning Pages
                 <i className="caret icon-cursor" />
               </span>
             </h1>
