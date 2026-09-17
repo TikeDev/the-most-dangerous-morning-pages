@@ -52,13 +52,13 @@
         color: inherit;
         text-decoration: none;
         transition: opacity .2s ease-in;
-        i {
+        .icon-mdwa {
             opacity: .2;
             cursor: pointer;
             display: inline-block;
             font-size: inherit;
             }
-        i:hover { opacity: 1; }
+        .icon-mdwa:hover { opacity: 1; }
         }
 
     .buttons {
