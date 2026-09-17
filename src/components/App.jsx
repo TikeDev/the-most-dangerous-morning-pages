@@ -98,13 +98,12 @@ class WritingApp extends React.Component {
   stopWarningSound() {
     if (!this.warningOscillator || !this.audioContext) return;
     const now = this.audioContext.currentTime;
-    this.warningGain.gain.cancelScheduledValues(now);
+    //this.warningGain.gain.cancelScheduledValues(now);
     this.warningGain.gain.setValueAtTime(this.warningGain.gain.value, now);
     this.warningGain.gain.linearRampToValueAtTime(0, now + 0.5);
-    // this.warningOscillator.stop(now + 0.6);
-    //this.warningOscillator2.stop(now + 0.6);
-    this.warningOscillator.disconnect();
-    this.warningOscillator2.disconnect();
+    this.warningOscillator.stop(now + 0.6);
+    this.warningOscillator2.stop(now + 0.6);
+
     this.warningGain.disconnect();
     this.warningOscillator = null;
     this.warningGain = null;
