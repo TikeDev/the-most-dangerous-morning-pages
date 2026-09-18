@@ -89,7 +89,7 @@
 .settings-page {
   max-width: 850px;
   margin: 0 auto;
-  padding: 72px 7vw;
+  padding: 42px 7vw;
 }
 
 .page-heading {
@@ -286,12 +286,15 @@
     font-size: 22px;
   }
 
+  .brand-mark {
+  height: 42px;
+  }
   .workspace-main {
     width: 100%;
   }
 
   .history-page,
   .settings-page {
-    padding: 72px 24px 40px;
+    padding: 62px 24px 40px;
   }
 }
