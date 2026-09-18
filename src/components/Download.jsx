@@ -9,14 +9,14 @@ export default class Download extends React.Component {
   }
 
   download () {
-    const firstLine = this.props.text.replace(/[",.!-::']/g , "");
-    const length = firstLine.indexOf(" ", 25);
-    const title = firstLine.substr(0, length > 0 ? length : 30);
-    const date = new Date(this.props.finishTime * 1000).toLocaleDateString();
+    const now = new Date();
+    const date = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
+      .map((part) => String(part).padStart(2, "0"))
+      .join("_");
     // Replace clean newlines with windows evil
     const text = this.props.text.replace(/([^\r])\n/g, "$1\r\n");
     const blob = new Blob([text], {type: "text/plain;charset=utf-8"});
-    const filename = `${title} (MDWA ${date}).md`;
+    const filename = `${date}_morning_pages.md`;
     FileSaver.saveAs(blob, filename);
   }
 
