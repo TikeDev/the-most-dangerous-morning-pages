@@ -91,22 +91,27 @@ export default class WriteButton extends React.Component {
     return (
       <div className={wrapperWlasses}>
         { !this.props.noPanel && !this.state.hidePanel && (this.state.compact ? this.renderCompactChooser() : this.renderFullChooser()) }
-        <Link
-          to={{
-            pathname: "/write",
-            search: `?limit=${limit}&type=${type}` + (hardcore ? '&hardcore=true' : '') + morning
-          }}
-          className={buttonClasses}
-          onMouseOver={this.showPanel}
-          onClick={(event) => {
-            if (this.props.onClick) {
-              event.preventDefault();
-              this.props.onClick();
-            }
-          }}
-        >
-          { this.props.label }
-        </Link>
+        {this.props.onClick ? (
+          <button
+            type="button"
+            className={buttonClasses}
+            onMouseOver={this.showPanel}
+            onClick={this.props.onClick}
+          >
+            {this.props.label}
+          </button>
+        ) : (
+          <Link
+            to={{
+              pathname: "/write",
+              search: `?limit=${limit}&type=${type}` + (hardcore ? '&hardcore=true' : '') + morning
+            }}
+            className={buttonClasses}
+            onMouseOver={this.showPanel}
+          >
+            { this.props.label }
+          </Link>
+        )}
       </div>
     )
   }
