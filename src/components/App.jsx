@@ -189,7 +189,9 @@ class WritingApp extends React.Component {
   }
 
   reset(type, limit, hardcore) {
-    const wasFullscreen = this.fullscreenHandler.active;
+    const fullscreenElement = document.fullscreenElement;
+    const wasFullscreen =
+      fullscreenElement === this.fullscreenHandler.node.current;
 
     this.setState(
       {
