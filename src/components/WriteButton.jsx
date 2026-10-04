@@ -98,6 +98,12 @@ export default class WriteButton extends React.Component {
           }}
           className={buttonClasses}
           onMouseOver={this.showPanel}
+          onClick={(event) => {
+            if (this.props.onClick) {
+              event.preventDefault();
+              this.props.onClick();
+            }
+          }}
         >
           { this.props.label }
         </Link>

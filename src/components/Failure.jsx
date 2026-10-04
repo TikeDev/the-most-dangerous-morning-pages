@@ -15,7 +15,7 @@ const TweetButton = ({ words }) => {
   );
 };
 
-const Failure = ({ limit, type, lost, words }) => {
+const Failure = ({ limit, type, lost, words, onTryAgain }) => {
   return (
     <TransitionGroup>
       {lost && (
@@ -35,6 +35,7 @@ const Failure = ({ limit, type, lost, words }) => {
             Again."
                 type={type}
                 limit={limit}
+                onClick={onTryAgain}
               />
             </div>
           </div>

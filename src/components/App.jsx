@@ -238,7 +238,7 @@ class WritingApp extends React.Component {
       <FullScreen handle={this.fullscreenHandler}>
         <AppContext.Provider value={this.state}>
           <div className={appClass}>
-            <Failure />
+            <Failure onTryAgain={() => this.reset(type, limit, hardcore)} />
             <Progress />
             <a
               href="/"
