@@ -111,7 +111,11 @@ class WritingApp extends React.Component {
 
   startWriting() {
     if (window.plausible) window.plausible("Start Writing");
-    if (!this.fullscreenHandler.active) this.fullscreenHandler.enter();
+    // Use the browser's fullscreen element as the source of truth. The hook's
+    // active state can lag during the failure screen -> editor transition.
+    if (document.fullscreenElement !== this.fullscreenHandler.node.current) {
+      this.fullscreenHandler.enter();
+    }
     this.setState({
       run: true,
       fullscreen: true,
