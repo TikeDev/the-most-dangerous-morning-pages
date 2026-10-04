@@ -189,20 +189,29 @@ class WritingApp extends React.Component {
   }
 
   reset(type, limit, hardcore) {
-    this.setState({
-      type,
-      limit,
-      hardcore,
-      won: false,
-      lost: false,
-      run: false,
-      startTime: null,
-      progress: 0,
-      timeSinceStroke: 0,
-      danger: false,
-      words: 0,
-    });
-    this.editor.current && this.editor.current.reset();
+    const wasFullscreen = this.fullscreenHandler.active;
+
+    this.setState(
+      {
+        type,
+        limit,
+        hardcore,
+        won: false,
+        lost: false,
+        run: false,
+        startTime: null,
+        progress: 0,
+        timeSinceStroke: 0,
+        danger: false,
+        words: 0,
+      },
+      () => {
+        this.editor.current && this.editor.current.reset();
+        if (wasFullscreen && !this.fullscreenHandler.active) {
+          this.fullscreenHandler.enter();
+        }
+      }
+    );
   }
 
   tick() {
