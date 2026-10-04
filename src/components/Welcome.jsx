@@ -19,7 +19,7 @@ const Welcome = () => (
         <i className="caret icon-cursor" />
       </h2>
       <Space xl />
-      <div className="welcome-actions"><WriteButton ghost color="red" /></div>
+      <div className="welcome-actions"><WriteButton ghost color="red" morning type="words" limit={750} /></div>
     </div>
   </div>
 );

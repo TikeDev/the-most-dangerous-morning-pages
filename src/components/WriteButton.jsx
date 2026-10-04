@@ -87,13 +87,14 @@ export default class WriteButton extends React.Component {
       ghost: this.props.ghost
     })
     const {limit, type, hardcore} = this.state;
+    const morning = this.props.morning ? '&morning=true' : '';
     return (
       <div className={wrapperWlasses}>
         { !this.props.noPanel && !this.state.hidePanel && (this.state.compact ? this.renderCompactChooser() : this.renderFullChooser()) }
         <Link
           to={{
             pathname: "/write",
-            search: `?limit=${limit}&type=${type}` + (hardcore ? '&hardcore=true' : '')
+            search: `?limit=${limit}&type=${type}` + (hardcore ? '&hardcore=true' : '') + morning
           }}
           className={buttonClasses}
           onMouseOver={this.showPanel}
