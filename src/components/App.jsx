@@ -189,31 +189,21 @@ class WritingApp extends React.Component {
   }
 
   reset(type, limit, hardcore) {
-    const fullscreenElement = document.fullscreenElement;
-    const wasFullscreen =
-      fullscreenElement === this.fullscreenHandler.node.current;
-
-    this.setState(
-      {
-        type,
-        limit,
-        hardcore,
-        won: false,
-        lost: false,
-        run: false,
-        startTime: null,
-        progress: 0,
-        timeSinceStroke: 0,
-        danger: false,
-        words: 0,
-      },
-      () => {
-        this.editor.current && this.editor.current.reset();
-        if (wasFullscreen && !this.fullscreenHandler.active) {
-          this.fullscreenHandler.enter();
-        }
-      }
-    );
+    // Try Again is already inside the same fullscreen element. Calling
+    // enter() again can exit and re-enter fullscreen instead of preserving it.
+    this.setState({
+      type,
+      limit,
+      hardcore,
+      won: false,
+      lost: false,
+      run: false,
+      startTime: null,
+      progress: 0,
+      timeSinceStroke: 0,
+      danger: false,
+      words: 0,
+    });
   }
 
   tick() {
