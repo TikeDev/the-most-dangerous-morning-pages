@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { downloadText } from "./Download";
 
 export const STORAGE_KEYS = {
   settings: "mdwa.settings",
@@ -82,7 +83,13 @@ export function HistoryPage({ morning = false }) {
       <div className="history-list">
         {entries.length === 0 ? <div className="history-empty"><span className="empty-mark">—</span><h2>No completed sessions yet</h2><p>Your finished writing sessions will appear here.</p></div> : entries.map((entry) => (
           <article className="history-card" key={entry.id}>
-            <div><time>{new Date(entry.finishedAt).toLocaleString()}</time><span className="history-meta">{entry.words || 0} words · {entry.type === "words" ? `${entry.limit} word goal` : `${entry.limit} minute goal`}</span></div>
+            <div className="history-card-heading">
+              <div><time>{new Date(entry.finishedAt).toLocaleString()}</time><span className="history-meta">{entry.words || 0} words · {entry.type === "words" ? `${entry.limit} word goal` : `${entry.limit} minute goal`}</span></div>
+              <button className="tiny ghost history-download" onClick={() => {
+                const date = new Date(entry.finishedAt).toISOString().slice(0, 10).replace(/-/g, "_");
+                downloadText(entry.text, `${date}_${morning ? "morning_pages" : "dangerous_writing"}.md`);
+              }}>Download</button>
+            </div>
             <p>{entry.text || "No text recorded."}</p>
           </article>
         ))}

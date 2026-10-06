@@ -141,6 +141,17 @@
   border: 1px solid rgba(70, 65, 60, .1);
 }
 
+.history-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.history-download {
+  flex: 0 0 auto;
+}
+
 .history-card time {
   font-size: 12px;
   font-weight: 700;
