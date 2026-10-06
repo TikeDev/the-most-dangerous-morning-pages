@@ -30,7 +30,7 @@ export function saveEntry(key, entry) {
 
 const navItems = [
   { to: "/morning-pages", label: "Morning Pages", icon: "icon-sun" },
-  { to: "/sessions", label: "Sessions", icon: "icon-history" },
+  { to: "/sessions", label: "Regular Sessions", icon: "icon-history" },
   { to: "/settings", label: "Settings", icon: "icon-cog" },
 ];
 
@@ -76,7 +76,7 @@ export function HistoryPage({ morning = false }) {
     <section className="history-page">
       <div className="page-heading">
         <p className="eyebrow">{morning ? "A daily practice" : "Your writing archive"}</p>
-        <h1>{morning ? "Morning Pages" : "Sessions"}</h1>
+        <h1>{morning ? "Morning Pages" : "Regular Sessions"}</h1>
         <p>{morning ? "Three pages, one clear mind. Start with 750 words." : "Every completed session, kept in one place."}</p>
         <Link className="primary-action" to={morning ? "/write?morning=true&type=words&limit=750" : "/write"}>{morning ? "Start Morning Pages" : "Start Writing"}</Link>
       </div>
